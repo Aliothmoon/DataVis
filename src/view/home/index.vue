@@ -61,13 +61,16 @@
       <a-layout style="padding: 0 2px;">
         <a-layout-content style="display: block">
           <Top></Top>
+
           <a-split direction="vertical">
             <template #first>
               <PicChart></PicChart>
+
               <!--              <BarChart></BarChart>-->
             </template>
             <template #second>
               <Bottom></Bottom>
+
             </template>
           </a-split>
 
@@ -92,7 +95,7 @@ import LineChart from "@/components/linc-chart/index.vue";
 import BarChart from "@/components/bar-chart/index.vue";
 import Bottom from "@/view/bottom/index.vue";
 import Top from "@/view/top/index.vue";
-
+import BarProChart from "@/components/bar-pro-chart/index.vue";
 export default defineComponent({
   components: {
     Bottom,
@@ -103,7 +106,8 @@ export default defineComponent({
     IconCaretLeft,
     IconHome,
     IconCalendar,
-    WordCloud
+    WordCloud,
+    BarProChart
   },
   setup() {
     const collapsed = ref(true);

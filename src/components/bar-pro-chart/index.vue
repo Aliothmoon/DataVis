@@ -27,7 +27,7 @@ export default {
           }));
 
           const svg = d3.select('#barPro')
-          const width = 500;
+          const width = 700;
           //928
           const height = 400;
           const marginTop = 30;
