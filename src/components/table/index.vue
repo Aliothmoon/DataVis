@@ -10,11 +10,17 @@ export default {
         dataIndex: 'name',
         ellipsis: true,
         tooltip: true,
-        width: 100
+        width: 100,
+        sortable: {
+          sortDirections: ['ascend', 'descend']
+        }
       },
       {
         title: 'Salary',
         dataIndex: 'salary',
+        sortable: {
+          sortDirections: ['ascend', 'descend']
+        }
       },
       {
         title: 'Address',
@@ -76,8 +82,8 @@ export default {
     <a-table :columns="columns"
              :data="data"
              :pagination="false"
-             :filter-icon-align-left="'right'"
-             :virtual-list-props="{height:'350px'}"
+             :virtual-list-props="{height:'26vh'}"
+             hoverable
     />
   </div>
 </template>

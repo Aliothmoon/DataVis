@@ -24,25 +24,22 @@ export default {
 </script>
 
 <template>
-  <div>
-    <a-split min="80px" class="split" v-model:size="size" disabled>
-      <template #first>
+  <a-row :align="'center'">
+    <a-col :span="11"  style="height: 100%;margin-left: 60px">
+      <a-card style="height: 100%;margin-right: 5px;" class="all-box-shadow" hoverable>
         <BarChart></BarChart>
-      </template>
-      <template #second>
-        <a-card title="数据表格">
-          <template #extra>
-            <a-link>More</a-link>
-          </template>
-          <DTable></DTable>
-        </a-card>
-      </template>
-    </a-split>
-  </div>
+      </a-card>
+    </a-col>
+    <a-col :span="11" style="margin-left: 16px">
+      <a-card  style="height: 100%" class="all-box-shadow" hoverable>
+        <DTable></DTable>
+      </a-card>
+    </a-col>
+  </a-row>
 </template>
 
 <style scoped>
 .split {
-  height: 500px;
+  height: 440px;
 }
 </style>

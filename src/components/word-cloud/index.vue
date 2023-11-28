@@ -1,13 +1,13 @@
 <script>
 import * as d3 from 'd3';
-import cloud from './cloud.js'
-import ci from '@/assets/cis.json'
-import words from '@/assets/words.json'
+import WordsCloud from './cloud.js'
+import {CloudWords} from "@/data/source.js"
+
 
 export default {
   name: "WordCloud",
   mounted() {
-    const data = [...words].map((d) => {
+    const data = [...CloudWords].map((d) => {
       return {
         text: d,
         value: Math.random() * 400
@@ -18,17 +18,16 @@ export default {
     const transition = d3.transition().duration(700).ease(d3.easeCubic);
     // 布局
 
-    // console.log(data)
-    // console.log(d3.schemeCategory10);
+    const [width, height] = [300, 300];
 
     let dataset = [];
 
     const colors = d3.scaleOrdinal(d3.schemeCategory10);
-    const layout = new cloud()
-        .size([400, 400])
+    const layout = new WordsCloud()
+        .size([width, height])
         .words(data)
         .font('Impact')
-        .spiral('archimedean')
+        .spiral('rectangular')
         .on('end', (d) => {
           dataset = d;
         });
@@ -36,11 +35,10 @@ export default {
     // 执行layout算法
     layout.start();
 
-    // 执行完layout算法后，会返回一个新数据。
 
     d3.select("#cloud-svg")
-        .attr("width", layout.size()[0])
-        .attr("height", layout.size()[1])
+        .attr('height', '60%')
+        .attr("viewBox", [0, 0, layout.size()[0], layout.size()[1]])
         .append("g")
         .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
     const animations = ['easeLinear', 'easePolyIn', 'easePolyOut', 'easePolyInOut', 'easeQuad', 'easeQuadIn', 'easeQuadOut',
@@ -89,8 +87,8 @@ export default {
     d3.select('#cloud-svg').on('click', () => {
 
       data.pop()
-      const layout = cloud()
-          .size([400, 400])
+      const layout = WordsCloud()
+          .size([width, height])
           .words(data)
           .font('Impact')
           .spiral('archimedean')
@@ -101,34 +99,22 @@ export default {
       // 执行layout算法
       layout.start();
     })
-    // setInterval(() => {
-    //   const layout = cloud()
-    //       .size([400, 400])
-    //       .words(data)
-    //       .font('Impact')
-    //       .spiral('archimedean')
-    //       .on('end', (d) => {
-    //         draw(d)
-    //       });
-    //
-    //   // 执行layout算法
-    //   layout.start();
-    // }, 5000)
-    cloud()
-        .size([400, 400])
+    WordsCloud()
+        .size([width, height])
         .words(data)
         .font('Impact')
         .spiral('archimedean')
         .on('end', (d) => {
           draw(d)
         }).start()
-
   }
 }
 </script>
 
 <template>
-   <svg  height="400" id="cloud-svg"></svg>
+  <div style="height: 100%;width: 100%">
+    <svg id="cloud-svg"></svg>
+  </div>
 </template>
 
 <style scoped>

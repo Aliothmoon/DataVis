@@ -26,11 +26,11 @@ export default {
 
           const svg = d3.select('#bar-chart')
           const width = 900;
-          const height = 400;
-          const marginTop = 20;
-          const marginRight = 30;
-          const marginBottom = 30;
-          const marginLeft = 40;
+          const height = 300;
+          const marginTop = 30;
+          const marginRight = 10;
+          const marginBottom = 20;
+          const marginLeft = 30;
 
           // Declare the x (horizontal position) scale.
           const x = d3.scaleUtc(d3.extent(submitData, d => d.date), [marginLeft, width - marginRight]);
@@ -44,10 +44,11 @@ export default {
               .y(d => y(d.count));
 
           // Create the SVG container.
-          svg.attr("width", width)
-              .attr("height", height)
+          svg
+              .attr("width", width)
+              // .attr("height", '90%')
               .attr("viewBox", [0, 0, width, height])
-              .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+              // .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
 
           // Add the x-axis.
           svg.append("g")
@@ -65,12 +66,13 @@ export default {
               .call(g => g.append("text")
                   .attr("x", -marginLeft)
                   .attr("y", 10)
-                  .attr("fill", "currentColor")
+                  .attr("fill", "#bcbd22")
                   .attr("text-anchor", "start")
                   .text("↑ 提交次数"));
 
           // Append a path for the line.
           svg.append("path")
+              .transition(d3.transition(d3.easeCircle).duration(1001))
               .attr("fill", "none")
               .attr("stroke", "steelblue")
               .attr("stroke-width", 1.5)
@@ -100,10 +102,8 @@ export default {
 <style scoped>
 .bar-chart-container {
   display: flex;
-  height: 100%;
   align-items: center;
   justify-content: center;
-  margin: 0 10px 0 10px;
 }
 
 </style>

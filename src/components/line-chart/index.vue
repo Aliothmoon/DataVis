@@ -1,4 +1,5 @@
 <script>
+// @departed
 import * as d3 from 'd3';
 
 export default {
@@ -88,9 +89,9 @@ export default {
 </script>
 
 <template>
-    <div>
-      <svg id="line-chart"></svg>
-    </div>
+  <div>
+    <svg id="line-chart"></svg>
+  </div>
 </template>
 
 <style scoped>
