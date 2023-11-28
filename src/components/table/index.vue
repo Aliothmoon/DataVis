@@ -10,14 +10,29 @@ export default {
                 dataIndex: 'className',
                 ellipsis: true,
                 tooltip: true,
-                width: 200,
+
+
                 sortable: {
                     sortDirections: ['ascend', 'descend']
                 }
             },
             {
-                title: 'Score',
+                title: 'Average',
                 dataIndex: 'score',
+                sortable: {
+                    sortDirections: ['ascend', 'descend']
+                }
+            },
+            {
+                title: 'Max Score',
+                dataIndex: 'maxScore',
+                sortable: {
+                    sortDirections: ['ascend', 'descend']
+                }
+            },
+            {
+                title: 'Min Score',
+                dataIndex: 'minScore',
                 sortable: {
                     sortDirections: ['ascend', 'descend']
                 }
@@ -26,12 +41,14 @@ export default {
 
         let data = reactive([]);
 
-        d3.csv('src/assets/class.csv').then(function(parsedData) {
+        d3.csv('src/assets/output.csv').then(function(parsedData) {
             parsedData.forEach((row, index) => {
                 data.push({
                     key: index.toString(),
                     className: row.className,
                     score: row.score,
+                    maxScore: row.maxScore,
+                    minScore: row.minScore,
                 });
             });
         });
