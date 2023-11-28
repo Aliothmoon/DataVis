@@ -39,11 +39,13 @@
     "d3-cloud": "^1.2.7",
     "d3-color": "^3.1.0",
     "d3-ease": "^3.0.1",
+    "d3-interpolate-path": "^2.3.0",
     "d3-scale": "^4.0.2",
     "d3-selection": "^3.0.0",
     "topojson": "^3.0.2",
     "topojson-client": "^3.1.0",
-    "vue": "^3.3.4"
+    "vue": "^3.3.4",
+    "yarn": "^1.22.21"
   },
   "devDependencies": {
     "@arco-design/web-vue": "^2.53.3",
