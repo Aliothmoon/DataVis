@@ -4,7 +4,7 @@ import * as d3 from 'd3';
 export default {
   name: "BarChart",
   mounted: () => {
-    d3.csv('public/all/1.csv')
+    d3.csv('src/assets/submitTime.csv')//考试进行情况
         .then(data => {
           const allMinutes = d3.range(Math.floor(d3.min(data, d => +d.submitTime) / 60), Math.ceil(d3.max(data, d => +d.submitTime) / 60));
 
