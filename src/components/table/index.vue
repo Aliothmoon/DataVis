@@ -1,80 +1,46 @@
 <script lang="ts">
 import {reactive} from "vue";
-
+import * as d3 from 'd3';
 export default {
-  name: "DTable",
-  setup: () => {
-    const columns = [
-      {
-        title: 'Name',
-        dataIndex: 'name',
-        ellipsis: true,
-        tooltip: true,
-        width: 100,
-        sortable: {
-          sortDirections: ['ascend', 'descend']
-        }
-      },
-      {
-        title: 'Salary',
-        dataIndex: 'salary',
-        sortable: {
-          sortDirections: ['ascend', 'descend']
-        }
-      },
-      {
-        title: 'Address',
-        dataIndex: 'address',
-        ellipsis: true,
-        width: 150,
-      },
-      {
-        title: 'Email',
-        dataIndex: 'email',
-        ellipsis: true,
-        tooltip: {position: 'left'},
-        width: 200,
-      },
-    ];
-    const data = reactive([{
-      key: '1',
-      name: 'Jane Doe',
-      salary: 23000,
-      address: '32 Park Road, London',
-      email: 'jane.doe@example.com'
-    }, {
-      key: '2',
-      name: 'Alisa Ross',
-      salary: 25000,
-      address: '35 Park Road, London',
-      email: 'alisa.ross@example.com'
-    }, {
-      key: '3',
-      name: 'Kevin Sandra',
-      salary: 22000,
-      address: '31 Park Road, London',
-      email: 'kevin.sandra@example.com'
-    }, {
-      key: '4',
-      name: 'Ed Hellen',
-      salary: 17000,
-      address: '42 Park Road, London',
-      email: 'ed.hellen@example.com'
-    }, {
-      key: '5',
-      name: 'William Smith',
-      salary: 27000,
-      address: '62 Park Road, London',
-      email: 'william.smith@example.com'
-    }]);
-    data.push(...data)
-    data.push(...data)
-    return {
-      data, columns
-    }
-  }
-}
+    name: "DTable",
+    setup: () => {
+        const columns = [
+            {
+                title: 'Class',
+                dataIndex: 'className',
+                ellipsis: true,
+                tooltip: true,
+                width: 200,
+                sortable: {
+                    sortDirections: ['ascend', 'descend']
+                }
+            },
+            {
+                title: 'Score',
+                dataIndex: 'score',
+                sortable: {
+                    sortDirections: ['ascend', 'descend']
+                }
+            },
+        ];
 
+        let data = reactive([]);
+
+        d3.csv('src/assets/class.csv').then(function(parsedData) {
+            parsedData.forEach((row, index) => {
+                data.push({
+                    key: index.toString(),
+                    className: row.className,
+                    score: row.score,
+                });
+            });
+        });
+
+        return {
+            data, columns
+        }
+    }
+}
 </script>
 
 <template>
