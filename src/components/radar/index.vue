@@ -106,7 +106,7 @@ export default {
     }
 
     drawRadarChart();
-    setInterval(drawRadarChart, 1500);
+    // setInterval(drawRadarChart, 1500);
   }
 }
 </script>
