@@ -9,8 +9,37 @@ defineComponent({
 
 <template>
   <div class="card">
-    <PicChart></PicChart>
+    <a-card :bordered="false">
+      <a-row>
+
+        <a-col :span="10">
+          <PicChart></PicChart>
+        </a-col>
+        <a-col :span="7">
+          <a-statistic title="不及格人数占比" :value="51.82" :precision="2" :value-from="0" :start="start" animation>
+            <template #prefix>
+              <icon-arrow-rise/>
+            </template>
+            <template #suffix>%</template>
+          </a-statistic>
+        </a-col>
+        <a-col :span="7">
+          <a-statistic title="满分人数占比" :value="4.55" :precision="2" :value-from="0" :start="start" animation>
+            <template #prefix>
+              <icon-arrow-rise/>
+            </template>
+            <template #suffix>%</template>
+          </a-statistic>
+        </a-col>
+      </a-row>
+
+
+    </a-card>
   </div>
+
+<!--  <div class="card">-->
+<!--    <PicChart></PicChart>-->
+<!--  </div>-->
 </template>
 
 <style scoped>

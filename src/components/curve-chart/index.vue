@@ -31,8 +31,7 @@ export default {
 
       const x = d3.scaleLinear([0, m - 1], [0, width]);
       const y = d3.scaleLinear([0, 1], [height, 0]);
-      const z = d3.interpolateCool;
-
+      const z = d3.interpolateBlues;
       const area = d3.area()
           .x((d, i) => x(i))
           .y0(d => y(d[0]))

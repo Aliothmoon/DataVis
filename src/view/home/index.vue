@@ -1,6 +1,6 @@
 <template>
   <div>
-<!--     <CurveChart></CurveChart>-->
+    <!--     <CurveChart></CurveChart>-->
     <div style="margin-bottom: 10px">
       <Top></Top>
     </div>

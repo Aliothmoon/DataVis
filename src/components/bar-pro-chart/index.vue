@@ -37,6 +37,9 @@ export default {
     const marginBottom = 30;
     const marginLeft = 40;
 
+    const [show, hidden] = useTooltip()
+
+
     // Declare the x (horizontal position) scale.
     const x = d3.scaleBand()
         .domain(avgScores.map(d => d.problemId))
@@ -60,8 +63,11 @@ export default {
         .selectAll()
         .data(avgScores)
         .join("rect")
-        .on('mousemove', () => {
-
+        .on('mousemove', (e) => {
+          show(e).text('Bar Pro')
+        })
+        .on('mouseout',()=>{
+          hidden()
         })
     g.attr("x", d => x(d.problemId))
         .attr("height", d => y(0) - y(d.avgScore))
