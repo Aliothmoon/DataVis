@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import {defineComponent} from "vue";
 import PicChart from "@/components/pie-chart/index.vue";
+import {useStore} from "@/store";
 
 defineComponent({
   name: "TopRightView"
 })
+const store = useStore();
+
+
 </script>
 
 <template>
@@ -16,7 +20,7 @@ defineComponent({
           <PicChart></PicChart>
         </a-col>
         <a-col :span="7">
-          <a-statistic title="不及格人数占比" :value="51.82" :precision="2" :value-from="0" animation>
+          <a-statistic title="不及格人数占比" :value="51.82" :precision="2" :value-from="0" animation :start="store.onRefreshDigitAnimation">
             <template #prefix>
               <icon-arrow-rise/>
             </template>
@@ -24,7 +28,7 @@ defineComponent({
           </a-statistic>
         </a-col>
         <a-col :span="7">
-          <a-statistic title="满分人数占比" :value="4.55" :precision="2" :value-from="0" animation>
+          <a-statistic title="满分人数占比" :value="4.55" :precision="2" :value-from="0" animation :start="store.onRefreshDigitAnimation">
             <template #prefix>
               <icon-arrow-rise/>
             </template>
@@ -45,7 +49,6 @@ defineComponent({
 <style scoped>
 .card {
   width: 25vw;
-  height: 13vh;
   background: rgb(255, 255, 255);
   border-radius: 0.4em;
   box-shadow: 0.3em 0.3em 0.7em #00000015;

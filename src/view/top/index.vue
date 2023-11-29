@@ -22,21 +22,14 @@ export default {
     WordCloud,
     // PicChart,
   },
-  setup: () => {
-    // const size = ref(0.67);
-    const size = ref(0.8);
-    return {
-      size
-    }
-  },
-  mounted: () => {
-  }
 }
 </script>
 
 <template>
-  <div style="height: 1px;background-color: rgba(147,184,227,0.5);">Head</div>
-  <Overview></Overview>
+  <div style="height: 1px;background-color: rgba(147,184,227,0.5);">
+
+  </div>
+    <Overview></Overview>
   <div style="margin-left: 60px;">
     <a-row :align="'center'">
       <a-col :span="6" >
@@ -49,8 +42,8 @@ export default {
           <BarPro></BarPro>
         </a-card>
       </a-col>
-      <a-col :span="6" offset="">
-        <a-card style="width: 20vw" class="all-box-shadow" hoverable>
+      <a-col :span="5" offset="">
+        <a-card  class="all-box-shadow" hoverable>
           <WordCloud></WordCloud>
         </a-card>
       </a-col>

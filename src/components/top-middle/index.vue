@@ -6,11 +6,12 @@ export default {
   setup: () => {
     const trigger = ref(false);
     const a = {
+      'height': '110px',
       'border-radius': '0',
       'transform': 'scale(1.1)'
     }
     const b = {
-      'width': '134px',
+      'width': '150px',
       'animation': 'opacity 1s ease-in-out'
     }
     const c = {
@@ -25,7 +26,7 @@ export default {
     }
     const e = {
       'opacity': '1',
-      'letter-spacing': '9.5px'
+      'letter-spacing': '7px'
     }
     const f = {
       'animation': 'trail 1s ease-in-out'
@@ -61,13 +62,12 @@ export default {
 
 <style scoped>
 .card {
-  width: 25vw;
-  height: 13vh;
+  width: 28vw;
   background: #243137;
   position: relative;
   display: grid;
   place-content: center;
-  border-radius: 10px;
+  border-radius: 9px;
   overflow: hidden;
   transition: all 0.5s ease-in-out;
 }
@@ -102,7 +102,7 @@ export default {
 }
 
 .content .logo {
-  height: 35px;
+  height: 37px;
   position: relative;
   width: 33px;
   overflow: hidden;
@@ -124,7 +124,7 @@ export default {
 .content .logo .trail {
   position: absolute;
   right: 0;
-  height: 100%;
+  height: 90%;
   width: 100%;
   opacity: 0;
 }
@@ -134,7 +134,7 @@ export default {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  margin-top: 30px;
+  margin-top: 20px;
   color: #bd9f67;
   padding-left: 8px;
   font-size: 11px;

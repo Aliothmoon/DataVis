@@ -8,32 +8,35 @@
 import * as d3 from 'd3';
 import * as d3ip from 'd3-interpolate-path'
 import {Radar} from "@/data/source.js";
-import {useTooltip,ListView} from "@/utils/tooltip.js";
+import {useTooltip, ListView} from "@/utils/tooltip.js";
+import {useStore} from "@/store/index.js";
+import {debounce} from "lodash";
 
 export default {
   name: "Radar",
   mounted() {
+    const store = useStore()
     let examPaperId = 22541
     let dataset = [];
 
     const [show, hidden] = useTooltip();
     const preprocess = () => {
-      const data = Radar;
-
-      const filteredData = data.filter(d => d.examPaperId === examPaperId.toString());
+      const filteredData = Radar.filter(d => d.examPaperId === examPaperId.toString());
       return filteredData.map(d => ({
         name: `${d.problemId} : ${d.knowName}`,
+        origin: d.knowName,
         value: d.score / 6 * 100
       }));
     }
 
-    const svgWidth = 600;
-    const svgHeight = 520;
-    const padding = 70;
+    const svgWidth = 340;
+    const svgHeight = 290;
+    const padding = 20;
     const centerX = svgWidth / 2;
     const centerY = svgHeight / 2;
     let i, x, y, angle;
     const svg = d3.select("#radar")
+        .attr('width', svgWidth * 0.9)
         .attr("viewBox", [0, 0, svgWidth, svgHeight])
     const radius = Math.min(centerX, centerY) - padding;
 
@@ -60,7 +63,7 @@ export default {
           .append("radialGradient")
 
       const transition = d3.transition(d3.easePolyInOut).duration(100)
-
+      const colors = d3.scaleOrdinal(d3.schemeCategory10)
       gradient.attr("id", "gradient")
 
           .attr("cx", "50%")
@@ -112,6 +115,7 @@ export default {
       const labels = svg
           .append("g")
           .attr("class", "labels");
+
       for (i = 0; i < numTicks; i++) {
         angle = angleScale(i);
         const r = radius + padding * 0.5;
@@ -120,15 +124,26 @@ export default {
         labels.append("text")
             .attr("x", x)
             .attr("y", y)
+            .attr('font-size', 12)
+            .style("font-family", "Impact")
+            .attr('fill', `${colors(dataset[i].name)}`)
             .attr("text-anchor", "middle")
             .text(dataset[i].name);
       }
       examPaperId = examPaperId >= 22760 ? 22541 : examPaperId + 1;
     }
 
+    const f = debounce(() => {
+      store.problemCategory = dataset;
+    }, 30)
+    store.$subscribe((mutation, state) => {
+      if (state[mutation.events.key]) {
+        f()
+      }
+    })
     svg.on('mousemove', (e) => {
-      console.log()
-      show(e).html(ListView(dataset.filter(d=>d.name).map(d=>d.name)))
+      f()
+      show(e).html(ListView(dataset.filter(d => d.name).map(d => d.name)))
     }).on('mouseout', (e) => {
       hidden()
     })
@@ -136,10 +151,10 @@ export default {
     drawRadarChart();
     setInterval(() => {
       svg.selectAll('*')
-          .transition(d3.transition(d3.easePolyOut).duration(20))
+          .transition(d3.transition(d3.easePolyOut).duration(30))
           .remove();
       drawRadarChart()
-    }, 2000);
+    }, 2100);
   }
 }
 </script>

@@ -3,10 +3,13 @@ import * as d3 from 'd3';
 import WordsCloud from './cloud.js'
 import {CloudWords} from "@/data/source.js"
 import {useTooltip, ListView} from "@/utils/tooltip.js";
+import {useStore} from "@/store/index.js";
+import {Animations} from "@/utils/d3-animation.js";
 
 export default {
   name: "WordCloud",
   mounted() {
+    const store = useStore()
     const [show, hidden] = useTooltip();
     const data = [...CloudWords].map((d) => {
       return {
@@ -38,15 +41,10 @@ export default {
 
 
     d3.select("#cloud-svg")
-        .attr('height', '60%')
+        .attr('width', 260)
         .attr("viewBox", [0, 0, layout.size()[0], layout.size()[1]])
         .append("g")
         .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
-    const animations = ['easeLinear', 'easePolyIn', 'easePolyOut', 'easePolyInOut', 'easeQuad', 'easeQuadIn', 'easeQuadOut',
-      'easeQuadInOut', 'easeCubic', 'easeCubicIn', 'easeCubicOut', 'easeCubicInOut', 'easeSin', 'easeSinIn', 'easeSinOut', 'easeSinInOut',
-      'easeExp', 'easeExpIn', 'easeExpOut', 'easeExpInOut', 'easeCircle', 'easeCircleIn', 'easeCircleOut', 'easeCircleInOut', 'easeElastic',
-      'easeElasticIn', 'easeElasticOut', 'easeElasticInOut', 'easeBack', 'easeBackIn', 'easeBackOut', 'easeBackInOut',
-      'easeBounce', 'easeBounceIn', 'easeBounceOut', 'easeBounceInOut']
     let i = 0;
 
     function draw(words) {
@@ -79,7 +77,7 @@ export default {
                 })
                     .style("font-family", "Impact")
                     .attr("text-anchor", "middle")
-                    .transition(d3.transition().duration(500).ease(eval(`d3.${animations[i++ % animations.length]}`)))
+                    .transition(d3.transition().duration(500).ease(Animations[i++ % Animations.length]))
                     .attr('fill', ({text}) => colors(text))
                     .attr("transform", function (d) {
                       return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
@@ -90,10 +88,7 @@ export default {
               })
     }
 
-
-    d3.select('#cloud-svg').on('click', () => {
-
-      data.pop()
+    const render = () => {
       const layout = WordsCloud()
           .size([width, height])
           .words(data)
@@ -105,6 +100,24 @@ export default {
 
       // 执行layout算法
       layout.start();
+    }
+
+    d3.select('#cloud-svg').on('click', () => {
+      render()
+    })
+
+    store.$subscribe((mutation, state) => {
+      if (mutation.events.key !== 'problemCategory') {
+        return;
+      }
+      data.forEach((e) => {
+        if (Math.random() * 10 > 5) {
+          e.value += 10;
+        } else if (state.problemCategory.map(d => d.origin).includes(e.text)) {
+          e.value += 200;
+        }
+      })
+      render()
     })
     WordsCloud()
         .size([width, height])
@@ -119,7 +132,7 @@ export default {
 </script>
 
 <template>
-  <div style="height: 100%;width: 100%">
+  <div style='display: flex;justify-content:center'>
     <svg id="cloud-svg"></svg>
   </div>
 </template>

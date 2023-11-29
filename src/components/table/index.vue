@@ -1,7 +1,11 @@
 <script>
-import {reactive, ref} from "vue";
+import {h, reactive, ref} from "vue";
 import * as d3 from 'd3';
 import {ClassOutput} from "@/data/source.js";
+import {Button, Modal} from "@arco-design/web-vue";
+import MoreView from "@/components/more-view/index.vue";
+import ViewCarousel from "@/components/view-carousel/index.vue";
+import {useStore} from "@/store/index.js";
 
 export default {
   name: "DTable",
@@ -39,22 +43,50 @@ export default {
           sortDirections: ['ascend', 'descend']
         }
       },
+      {
+        title: 'Chart',
+        render: ({record}) => {
+          return h(
+              Button,
+              {
+                type: 'primary',
+                size: 'small',
+                onClick: () => {
+                  Modal.open({
+                    title: record.className,
+                    width: '700px',
+                    content: () => {
+                      return h(ViewCarousel)
+                    }
+                  });
+                }
+              }, () => {
+                return "更多"
+              }
+          );
+        }
+      },
     ];
 
-    const data = ref([]);
-    data.value = ClassOutput.map((row, index) => ({
+    const data = ref(ClassOutput.map((row, index) => ({
       key: index,
       className: row.className,
       score: row.score,
       maxScore: row.maxScore,
       minScore: row.minScore,
-    }));
-
-
-    return {
-      data, columns
+    })));
+    const store = useStore();
+    const handleChange = (e) => {
+      store.trigger = true
+      setTimeout(() => {
+        store.trigger = false;
+      }, 100)
     }
-  }
+    return {
+      data, columns, handleChange
+    }
+
+  },
 }
 </script>
 
@@ -63,8 +95,9 @@ export default {
     <a-table :columns="columns"
              :data="data"
              :pagination="false"
-             :virtual-list-props="{height:'26vh'}"
+             :virtual-list-props="{height:'30vh'}"
              hoverable
+             @change="handleChange"
     />
   </div>
 </template>

@@ -33,23 +33,14 @@ const colors = d3.scaleOrdinal(d3.schemeCategory10)
 /**
  *
  * @param str {Array<string>}
- * @constructor
  */
-const ListView = (str) => {
-
-    return str.map((s) => {
-        return `
+const ListView = str => str.map((s) => `
 <div class="content-panel">
 <span>
         <span style="background-color: ${colors(s)};" class="tooltip-item-icon"></span>
         <span class="tooltip-value">${s}</span>
 </span>
-</div>`
-    }).reduce((previousValue, currentValue, currentIndex, array) => {
-        return previousValue + currentValue;
-    })
-}
-
+</div>`).join('');
 
 export {
     useTooltip, ListView

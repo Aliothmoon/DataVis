@@ -44,19 +44,16 @@ onMounted(() => {
       .value(d => d.value);
 
   const arc = d3.arc()
-      .innerRadius(30)
-      .outerRadius(70);
+      .innerRadius(25)
+      .outerRadius(80);
 
   const better = d3.arc()
-      .innerRadius(30)
+      .innerRadius(25)
       .outerRadius(90);
 
   const labelRadius = arc.outerRadius()() * 0.8;
 
-  // A separate arc generator for labels.
-  const arcLabel = d3.arc()
-      .innerRadius(labelRadius)
-      .outerRadius(labelRadius);
+
 
   const arcs = pie(data);
   //

@@ -26,7 +26,7 @@ export default {
       const n = 30;
       const m = 200;
       const k = 10;
-      const width = 400;
+      const width = 300;
       const height = 100;
 
       const x = d3.scaleLinear([0, m - 1], [0, width]);
@@ -53,7 +53,7 @@ export default {
 
       const svg = d3.select("#curve-chart")
           .attr("viewBox", [0, 0, width, height])
-          .attr("width", width)
+          .attr("width", width*0.9)
           .attr("height", height)
           .attr("style", "max-width: 100%; height: auto;");
 

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!--     <CurveChart></CurveChart>-->
     <div style="margin-bottom: 10px">
       <Top></Top>
     </div>
@@ -24,6 +23,7 @@ import Top from "@/view/top/index.vue";
 import BarProChart from "@/components/bar-pro-chart/index.vue";
 import CurveChart from "@/components/curve-chart/index.vue";
 import LineChart from "@/components/line-chart/index.vue";
+
 export default defineComponent({
   components: {
     CurveChart,
@@ -39,17 +39,6 @@ export default defineComponent({
     LineChart
   },
   setup() {
-    const collapsed = ref(true);
-    const onCollapse = () => {
-      collapsed.value = !collapsed.value;
-    };
-    return {
-      collapsed,
-      onCollapse,
-      onClickMenuItem(key) {
-        Message.info({content: `You select ${key}`, showIcon: true});
-      }
-    };
   },
 });
 </script>

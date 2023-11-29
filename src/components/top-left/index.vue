@@ -9,19 +9,17 @@ export default {
 
 <template>
   <div class="card">
-    <a-card :bordered="false">
+    <a-card :bordered="false" >
       <a-row>
         <a-col :span="6">
           <a-statistic title="总体学生平均分" :value="14.99" :precision="2" :value-from="0"  animation>
             <template #suffix>/30分</template>
           </a-statistic>
         </a-col>
-        <a-col :span="18">
-          <CurveChart></CurveChart>
+        <a-col :offset="3" :span="15">
+            <CurveChart></CurveChart>
         </a-col>
       </a-row>
-
-
     </a-card>
   </div>
 </template>
@@ -31,7 +29,6 @@ export default {
 
 .card {
   width: 25vw;
-  height: 13vh;
   background: rgb(255, 255, 255);
   border-radius: 0.4em;
   box-shadow: 0.3em 0.3em 0.7em #00000015;
