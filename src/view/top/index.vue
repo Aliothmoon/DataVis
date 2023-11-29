@@ -37,7 +37,7 @@ export default {
 <template>
   <div style="height: 1px;background-color: rgba(147,184,227,0.5);">Head</div>
   <Overview></Overview>
-  <div style=";margin-left: 60px;">
+  <div style="margin-left: 60px;">
     <a-row :align="'center'">
       <a-col :span="6" >
         <a-card class="all-box-shadow" hoverable>

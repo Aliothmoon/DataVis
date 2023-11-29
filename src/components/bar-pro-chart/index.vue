@@ -6,7 +6,7 @@
 
 <script>
 import * as d3 from 'd3';
-import {useTooltip} from '@/utils/tooltip.js';
+import {useTooltip, ListView} from "@/utils/tooltip.js";
 import {debounce} from 'lodash'
 import {PaperProblem} from '@/data/source.js'
 
@@ -63,10 +63,11 @@ export default {
         .selectAll()
         .data(avgScores)
         .join("rect")
-        .on('mousemove', (e) => {
-          show(e).text('Bar Pro')
+        .on('mousemove', (e, d) => {
+          const {avgScore, problemId} = d;
+          show(e).html(ListView([`题号: ${problemId}`, `平均分: ${avgScore.toFixed(3)}分`,]))
         })
-        .on('mouseout',()=>{
+        .on('mouseout', () => {
           hidden()
         })
     g.attr("x", d => x(d.problemId))

@@ -1,19 +1,20 @@
 <script setup>
 import * as d3 from 'd3';
 import {defineComponent, onMounted} from "vue";
-import {Exam_paper_1} from '@/data/source.js'
+import {ExamPaper} from '@/data/source.js'
+import {useTooltip, ListView} from "@/utils/tooltip.js";
 
 defineComponent({
   name: "PicChart"
 })
 onMounted(() => {
-
+  const [show, hide] = useTooltip();
   const svg = d3.select('.pic-chart')
   const width = 180;
   const height = Math.min(width, 400);
   // const data = PopulationAge;
   // Create the color scale.
-  const data_1=Exam_paper_1;
+  const paper = ExamPaper;
 
   let data = [
     {name: "0-5", value: 0},
@@ -23,7 +24,7 @@ onMounted(() => {
     {name: "20-25", value: 0},
     {name: "25-30", value: 0}
   ];
-  data_1.forEach(d => {
+  paper.forEach(d => {
     let score = +d.score;
     if (score <= 5) data[0].value++;
     else if (score <= 10) data[1].value++;
@@ -32,7 +33,6 @@ onMounted(() => {
     else if (score <= 25) data[4].value++;
     else if (score <= 30) data[5].value++;
   });
-  console.log(data)
 
   const color = d3.scaleOrdinal()
       .domain(data.map(d => d.name))
@@ -76,35 +76,19 @@ onMounted(() => {
             .transition(d3.transition(d3.easeBackInOut).duration(120))
             .attr("d", better)
       })
+      .on('mousemove', (e, d) => {
+        const data = d.data;
+        show(e).html(ListView([`分数段: ${data.name}`, `总体占比 ${(data.value / 2.2).toFixed(1)}%`]))
+      })
       .on('mouseout', function (e) {
         d3.select(this)
             .transition(d3.transition(d3.easeBackInOut).duration(300))
             .attr("d", arc)
+        hide()
       })
       .append("title")
       .text(d => `${d.data.name}: ${d.data.value.toLocaleString("en-US")}`)
 
-
-
-
-
-  // Create a new arc generator to place a label close to the edge.
-  // The label shows the value if there is enough room.
-  // svg.append("g")
-  //     .attr("text-anchor", "middle")
-  //     .selectAll()
-  //     .data(arcs)
-  //     .join("text")
-  //     .attr("transform", d => `translate(${arcLabel.centroid(d)})`)
-  //     .call(text => text.append("tspan")
-  //         .attr("y", "-0.4em")
-  //         .attr("font-weight", "bold")
-  //         .text(d => d.data.name))
-  //     .call(text => text.filter(d => (d.endAngle - d.startAngle) > 0.25).append("tspan")
-  //         .attr("x", 0)
-  //         .attr("y", "0.7em")
-  //         .attr("fill-opacity", 0.7)
-  //         .text(d => d.data.value.toLocaleString("en-US")));
 
 })
 </script>

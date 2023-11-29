@@ -2,11 +2,12 @@
 import * as d3 from 'd3';
 import WordsCloud from './cloud.js'
 import {CloudWords} from "@/data/source.js"
-
+import {useTooltip, ListView} from "@/utils/tooltip.js";
 
 export default {
   name: "WordCloud",
   mounted() {
+    const [show, hidden] = useTooltip();
     const data = [...CloudWords].map((d) => {
       return {
         text: d,
@@ -56,6 +57,12 @@ export default {
                 elem.append("text")
                     .style("font-size", function (d) {
                       return d.size + "px";
+                    })
+                    .on('mousemove', (e, {text}) => {
+                      show(e).html(ListView([text]))
+                    })
+                    .on('mouseout', () => {
+                      hidden()
                     })
                     .style("font-family", "Impact")
                     .attr("text-anchor", "middle")

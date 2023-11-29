@@ -12,10 +12,7 @@ export default {
     <a-card :bordered="false">
       <a-row>
         <a-col :span="6">
-          <a-statistic title="总体学生平均分" :value="14.99" :precision="2" :value-from="0" :start="start" animation>
-            <template #prefix>
-              <icon-arrow-rise/>
-            </template>
+          <a-statistic title="总体学生平均分" :value="14.99" :precision="2" :value-from="0"  animation>
             <template #suffix>/30分</template>
           </a-statistic>
         </a-col>
