@@ -23,7 +23,7 @@ import Bottom from "@/view/bottom/index.vue";
 import Top from "@/view/top/index.vue";
 import BarProChart from "@/components/bar-pro-chart/index.vue";
 import CurveChart from "@/components/curve-chart/index.vue";
-
+import LineChart from "@/components/line-chart/index.vue";
 export default defineComponent({
   components: {
     CurveChart,
@@ -35,7 +35,8 @@ export default defineComponent({
     IconHome,
     IconCalendar,
     WordCloud,
-    BarProChart
+    BarProChart,
+    LineChart
   },
   setup() {
     const collapsed = ref(true);

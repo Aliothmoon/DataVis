@@ -41,7 +41,7 @@ export default {
     const startDate = new Date("Wed Jan 05 2022 09:45:00");
     const endDate = new Date("Wed Jan 05 2022 12:15:00");
 
-    console.log(startDate)
+    // console.log(startDate)
     //const x = d3.scaleUtc(d3.extent(submitData, d => d.date), [marginLeft, width - marginRight]);
     const x = d3.scaleTime()
         .domain([startDate, endDate])
@@ -81,7 +81,7 @@ export default {
         .attr("stroke", "steelblue")
         .attr("stroke-width", 1.5)
         .attr("d", line(submitData))
-
+    console.log(submitData)
 
     // Add a horizontal line at y=0
     svg.append("line")
