@@ -16,7 +16,7 @@ defineComponent({
           <PicChart></PicChart>
         </a-col>
         <a-col :span="7">
-          <a-statistic title="不及格人数占比" :value="51.82" :precision="2" :value-from="0" :start="start" animation>
+          <a-statistic title="不及格人数占比" :value="51.82" :precision="2" :value-from="0" animation>
             <template #prefix>
               <icon-arrow-rise/>
             </template>
@@ -24,7 +24,7 @@ defineComponent({
           </a-statistic>
         </a-col>
         <a-col :span="7">
-          <a-statistic title="满分人数占比" :value="4.55" :precision="2" :value-from="0" :start="start" animation>
+          <a-statistic title="满分人数占比" :value="4.55" :precision="2" :value-from="0" animation>
             <template #prefix>
               <icon-arrow-rise/>
             </template>
@@ -37,9 +37,9 @@ defineComponent({
     </a-card>
   </div>
 
-<!--  <div class="card">-->
-<!--    <PicChart></PicChart>-->
-<!--  </div>-->
+  <!--  <div class="card">-->
+  <!--    <PicChart></PicChart>-->
+  <!--  </div>-->
 </template>
 
 <style scoped>

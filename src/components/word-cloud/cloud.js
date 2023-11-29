@@ -1,8 +1,3 @@
-// Word cloud layout by Jason Davies, https://www.jasondavies.com/wordcloud/
-// Algorithm due to Jonathan Feinberg, https://s3.amazonaws.com/static.mrfeinberg.com/bv_ch03.pdf
-
-// const dispatch = require("d3-dispatch").dispatch;
-
 import {dispatch} from 'd3'
 
 const RADIANS = Math.PI / 180;

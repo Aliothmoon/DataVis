@@ -1,67 +1,86 @@
 <template>
-  <div style="height: 40vh;width: 20vw">
-    <svg id="radar"></svg>
-  </div>
+  <!--  <div style="height: 40vh;width: 20vw">-->
+  <svg id="radar" preserveAspectRatio="xMaxYMax"></svg>
+  <!--  </div>-->
 </template>
 
 <script>
 import * as d3 from 'd3';
 import * as d3ip from 'd3-interpolate-path'
 import {Radar} from "@/data/source.js";
+import {useTooltip,ListView} from "@/utils/tooltip.js";
 
 export default {
   name: "Radar",
   mounted() {
-    let exam_paper_id = 22541
-    let svg = null;
+    let examPaperId = 22541
+    let dataset = [];
+
+    const [show, hidden] = useTooltip();
+    const preprocess = () => {
+      const data = Radar;
+
+      const filteredData = data.filter(d => d.examPaperId === examPaperId.toString());
+      return filteredData.map(d => ({
+        name: `${d.problemId} : ${d.knowName}`,
+        value: d.score / 6 * 100
+      }));
+    }
+
+    const svgWidth = 600;
+    const svgHeight = 520;
+    const padding = 70;
+    const centerX = svgWidth / 2;
+    const centerY = svgHeight / 2;
+    let i, x, y, angle;
+    const svg = d3.select("#radar")
+        .attr("viewBox", [0, 0, svgWidth, svgHeight])
+    const radius = Math.min(centerX, centerY) - padding;
+
+    const valueScale = d3.scaleLinear()
+        .domain([0, 100])
+        .range([0, radius]);
+
 
     function drawRadarChart() {
-      const data = Radar;
-      let i, x, y;
-      let angle;
-      const filteredData = data.filter(d => d.exam_paper_id === exam_paper_id.toString());
-      console.log(filteredData)
-      const dataset = filteredData.map(d => {
-        return {
-          name: d.problem_id + ":" + d.know_name,
-          value: d.score / 6 * 100
-        };
-      });
-      const padding = 50;
-      const svgWidth = 600;
-      const svgHeight = 520;
-      const centerX = svgWidth / 2;
-      const centerY = svgHeight / 2;
-      const radius = Math.min(centerX, centerY) - padding;
+      dataset = preprocess();
       const numTicks = dataset.length;
       const angleScale = d3.scaleLinear()
           .domain([0, numTicks])
           .range([0, Math.PI * 2]);
-      const valueScale = d3.scaleLinear()
-          .domain([0, 100])
-          .range([0, radius]);
-      if (svg == null) {
-        svg = d3.select("#radar")
-            .attr("viewBox", [0, 0, svgWidth, svgHeight])
-      } else {
-        svg.selectAll("*").remove();
-      }
-      const gradient = svg.append("defs")
+      const line = d3.line()
+          .x(function (d, i) {
+            return centerX + valueScale(d.value) * Math.sin(angleScale(i));
+          })
+          .y(function (d, i) {
+            return centerY - valueScale(d.value) * Math.cos(angleScale(i));
+          });
+      const gradient = svg
+          .append("defs")
           .append("radialGradient")
-          .attr("id", "gradient")
+
+      const transition = d3.transition(d3.easePolyInOut).duration(100)
+
+      gradient.attr("id", "gradient")
+
           .attr("cx", "50%")
           .attr("cy", "50%")
-          .attr("r", "50%")
           .attr("fx", "50%")
-          .attr("fy", "50%");
+          .attr("fy", "50%")
+          .transition(transition)
+          .attr("r", "50%")
+
       gradient.append("stop")
+          .transition(transition)
           .attr("offset", "0%")
-          .attr("stop-color", "#f6efa6")
-          .attr("stop-opacity", 1);
+          .attr("stop-color", "#7dceff")
+          .attr("stop-opacity", 0.3);
       gradient.append("stop")
+          // .transition(transition)
           .attr("offset", "100%")
-          .attr("stop-color", "#69b3a2")
-          .attr("stop-opacity", 1);
+          .attr("stop-color", "#7dceff")
+          .attr("stop-opacity", 0.7);
+
       const polygon = svg.append("g")
           .attr("class", "polygon");
       for (i = 0; i < numTicks; i++) {
@@ -73,31 +92,25 @@ export default {
             .attr("y1", centerY)
             .attr("x2", x)
             .attr("y2", y)
-            .attr("stroke", "#cccccc")
+            .attr("stroke", "#132a9f")
             .attr("stroke-width", 1);
       }
-      const line = d3.line()
-          .x(function (d, i) {
-            return centerX + valueScale(d.value) * Math.sin(angleScale(i));
-          })
-          .y(function (d, i) {
-            return centerY - valueScale(d.value) * Math.cos(angleScale(i));
-          });
+
       svg.append("path")
           .datum(dataset)
           .attr("fill", "url(#gradient)")
-          .attr("stroke", "#69b3a2")
-          .attr("stroke-width", 2)
+          .attr("stroke", "rgba(247,114,52,0.39)")
+          .attr("stroke-width", 3)
           .attr("d", line)
-          .transition() // 添加过渡
-          .duration(1000) // 过渡持续时间，单位为毫秒
+          .transition(d3.easeCircle)
+          .duration(1000)
           .attrTween("d", function (d) {
-            var previous = d3.select(this).attr("d");
-            var current = line(d);
-
+            let previous = d3.select(this).attr("d");
+            let current = line(d);
             return d3ip.interpolatePath(previous, current);
           });
-      const labels = svg.append("g")
+      const labels = svg
+          .append("g")
           .attr("class", "labels");
       for (i = 0; i < numTicks; i++) {
         angle = angleScale(i);
@@ -110,11 +123,23 @@ export default {
             .attr("text-anchor", "middle")
             .text(dataset[i].name);
       }
-      exam_paper_id = exam_paper_id >= 22760 ? 22541 : exam_paper_id + 1;
+      examPaperId = examPaperId >= 22760 ? 22541 : examPaperId + 1;
     }
 
+    svg.on('mousemove', (e) => {
+      console.log()
+      show(e).html(ListView(dataset.filter(d=>d.name).map(d=>d.name)))
+    }).on('mouseout', (e) => {
+      hidden()
+    })
     drawRadarChart();
-    // setInterval(drawRadarChart, 1500);
+    drawRadarChart();
+    setInterval(() => {
+      svg.selectAll('*')
+          .transition(d3.transition(d3.easePolyOut).duration(20))
+          .remove();
+      drawRadarChart()
+    }, 2000);
   }
 }
 </script>

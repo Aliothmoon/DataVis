@@ -1,4 +1,4 @@
-pap_pro_id,exam_id,exam_paper_id,exam_param_id,problem_id,order,last_submit_time,submit_id,is_aced,used_time,submit_count,score,create_time,modify_time,modify_user_id,know_name
+papProId,examId,examPaperId,examParamId,problemId,order,lastSubmitTime,submitId,isAced,usedTime,submitCount,score,createTime,modifyTime,modifyUserId,knowName
 115260,133,22541,829,3,0,2022-01-05 11:13:10,447722,5,0,1,0,2022-01-05 09:27:57,2022-01-05 11:13:12,-1,动态规划
 115261,133,22541,830,32,1,2022-01-05 09:56:12,444528,1,3072,3,6,2022-01-05 09:27:57,2022-01-05 09:56:14,-1,动态规划
 115262,133,22541,831,35,2,,,0,0,0,0,2022-01-05 09:27:57,2022-01-05 09:27:57,3088,贪心策略

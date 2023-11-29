@@ -51,8 +51,6 @@ export default {
         return layers;
       }
 
-      console.log(randomize())
-
       const svg = d3.select("#curve-chart")
           .attr("viewBox", [0, 0, width, height])
           .attr("width", width)
