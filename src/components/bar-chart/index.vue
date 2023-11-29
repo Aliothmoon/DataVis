@@ -31,12 +31,21 @@ export default {
     const width = 900;
     const height = 300;
     const marginTop = 30;
-    const marginRight = 10;
+    const marginRight = 20;
     const marginBottom = 20;
     const marginLeft = 30;
 
-    const x = d3.scaleUtc(d3.extent(submitData, d => d.date), [marginLeft, width - marginRight]);
+    const parseTime = d3.timeParse("%H:%M");
+    const formatTime = d3.timeFormat("%H:%M");
 
+    const startDate = new Date("Wed Jan 05 2022 09:45:00");
+    const endDate = new Date("Wed Jan 05 2022 12:15:00");
+
+    console.log(startDate)
+    //const x = d3.scaleUtc(d3.extent(submitData, d => d.date), [marginLeft, width - marginRight]);
+    const x = d3.scaleTime()
+        .domain([startDate, endDate])
+        .range([marginLeft, width - marginRight]);
     const y = d3.scaleLinear([0, d3.max(submitData, d => d.count)], [height - marginBottom, marginTop]);
 
     const line = d3.line()
@@ -47,8 +56,8 @@ export default {
         .attr("viewBox", [0, 0, width, height])
 
     svg.append("g")
-        .attr("transform", `translate(0,${height - marginBottom})`)
-        .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0));
+        .attr("transform", `translate(0, ${height - marginBottom})`)
+        .call(d3.axisBottom(x).tickFormat(formatTime).tickSizeOuter(0));
 
     svg.append("g")
         .attr("transform", `translate(${marginLeft},0)`)
