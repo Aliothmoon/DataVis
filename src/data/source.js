@@ -15,7 +15,12 @@ const PaperProblem = d3.csvParse(paper);
 const Radar = d3.csvParse(radar);
 const ExamPaper = d3.csvParse(examPaper);
 const SubmitTime = d3.csvParse(submitTime);
-const ClassOutput = d3.csvParse(classOutput);
+const ClassOutput = d3.csvParse(classOutput).map((value) => ({
+    ...value,
+    score: +value.score,
+    maxScore: +value.maxScore,
+    minScore: +value.minScore
+}));
 const LineChart = d3.csvParse(lineChart)
 
 
