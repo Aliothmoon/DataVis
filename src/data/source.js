@@ -5,7 +5,7 @@ import CloudWords from '@/assets/words.json'
 import examPaper from '@/assets/examPaper.csv?raw'
 import classOutput from '@/assets/output.csv?raw'
 import lineChart from "@/assets/result.csv?raw";
-import SC from "@/assets/geo/china/geometryProvince/51.json";
+import GeoMapping from "@/assets/geomapping.json";
 import * as d3 from 'd3';
 
 import GeoInfo from '@/assets/provinces.json'
@@ -18,6 +18,7 @@ const SubmitTime = d3.csvParse(submitTime);
 const ClassOutput = d3.csvParse(classOutput);
 const LineChart = d3.csvParse(lineChart)
 
+
 export {
     PaperProblem,
     Radar,
@@ -26,6 +27,7 @@ export {
     SubmitTime,
     ClassOutput,
     LineChart,
-    SC, GeoInfo
+    GeoInfo,
+    GeoMapping
 
 }

@@ -16,14 +16,7 @@ export default {
 </script>
 
 <template>
-    <Home></Home>
-  <!--  <div style="height: 100vh;width: 500px;display:flex;justify-content:center;align-items:center">-->
-  <!--      <Radar></Radar>-->
-<!--  <LineChart></LineChart>-->
-  <!--  </div>-->
-<!--  <More></More>-->
-<!--  <ViewCarousel></ViewCarousel>-->
-
+  <Home></Home>
 </template>
 
 <style scoped>

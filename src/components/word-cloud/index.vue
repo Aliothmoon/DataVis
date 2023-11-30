@@ -5,6 +5,7 @@ import {CloudWords} from "@/data/source.js"
 import {useTooltip, ListView} from "@/utils/tooltip.js";
 import {useStore} from "@/store/index.js";
 import {Animations} from "@/utils/d3-animation.js";
+import {watch} from "vue";
 
 export default {
   name: "WordCloud",
@@ -107,7 +108,7 @@ export default {
     })
 
     store.$subscribe((mutation, state) => {
-      if (mutation.events.key !== 'problemCategory') {
+      if (state.current !== 'problemCategory') {
         return;
       }
       data.forEach((e) => {

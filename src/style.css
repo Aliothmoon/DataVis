@@ -37,7 +37,10 @@
 }
 
 body {
-    background-color: #f2f3f5;
+    /*background-color: #f2f3f5;*/
+    height: 100vh;
+    background: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%) no-repeat;
+    /*background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%);*/
     /** background-color: #29292c;*/
 }
 

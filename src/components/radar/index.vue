@@ -135,10 +135,11 @@ export default {
 
     const f = debounce(() => {
       store.problemCategory = dataset;
+      store.current = 'problemCategory'
     }, 30)
     store.$subscribe((mutation, state) => {
-      if (state[mutation.events.key]) {
-        f()
+      if (state.current === 'trigger' && state.trigger) {
+        setTimeout(f, 0)
       }
     })
     svg.on('mousemove', (e) => {

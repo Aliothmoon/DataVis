@@ -30,10 +30,10 @@ export default {
     <a-col :span="11" style="height: 100%;margin-left: 60px">
       <a-card style="height: 100%;margin-right: 5px;" class="all-box-shadow" hoverable>
         <a-tabs default-active-key="1">
-          <a-tab-pane key="1" :title="'提交时刻表'">
+          <a-tab-pane key="1" :title="'提交次数表'">
             <BarChart></BarChart>
           </a-tab-pane>
-          <a-tab-pane key="2" :title="'提交速率表'">
+          <a-tab-pane key="2" :title="'总得分表'">
             <LineChart></LineChart>
           </a-tab-pane>
         </a-tabs>

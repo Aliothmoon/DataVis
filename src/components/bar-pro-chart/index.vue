@@ -75,7 +75,7 @@ export default {
       })
       x.domain(avgScores.map(d => d.problemId))
       svg.select('#x-axis')
-          .transition(d3.transition(d3.easeCircleIn).duration(200))
+          .transition(d3.transition(d3.easeCircleIn).duration(800))
           .attr("transform", `translate(0,${height - marginBottom})`)
           .call(d3.axisBottom(x).tickSizeOuter(0))
           .call(g => g.selectAll(".tick text")
@@ -83,11 +83,10 @@ export default {
       const rect = svg.select('g')
           .selectAll('rect')
       rect.data(avgScores)
-          .transition(d3.transition(d3.easeCircleIn).duration(200))
+          .transition(d3.transition(d3.easeCircleIn).duration(800))
           .attr("x", d => x(d.problemId))
           .attr("height", d => y(0) - y(d.avgScore))
           .attr("y", d => y(d.avgScore))
-          // .transition(d3.transition(d3.easeCircle).duration(1001))
           .attr("width", x.bandwidth())
           .attr("fill", (d) => colors(d.avgScore))
     }
@@ -95,11 +94,11 @@ export default {
     svg.on('click', trigger)
 
     store.$subscribe((mutation, state) => {
-      if (state[mutation.events.key]) {
+      if (state.current === 'trigger' && state.trigger) {
         trigger()
       }
     })
-    // console.log(document.querySelector('#barPro').click());
+
     g.attr("x", d => x(d.problemId))
         .attr("height", d => y(0) - y(d.avgScore))
         .attr("y", d => y(d.avgScore))

@@ -78,8 +78,10 @@ export default {
     const store = useStore();
     const handleChange = (e) => {
       store.trigger = true
+      store.current = 'trigger'
       setTimeout(() => {
         store.trigger = false;
+        store.current = 'trigger'
       }, 100)
     }
     return {

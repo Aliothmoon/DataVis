@@ -8,7 +8,8 @@ const useStore = defineStore('store', {
         problemCategory: [],
         onRefreshDigitAnimation: true,
         index: 0,
-        trigger: false
+        trigger: false,
+        current: ''
     })
 })
 export {

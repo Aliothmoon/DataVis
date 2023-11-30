@@ -1,13 +1,17 @@
 <script>
 import * as d3 from 'd3';
-import {GeoInfo} from "@/data/source.js";
+import {GeoInfo, GeoMapping} from "@/data/source.js";
 import {ListView, useTooltip} from "@/utils/tooltip.js";
 import {useStore} from "@/store/index.js";
+import {Card, CardMeta} from '@arco-design/web-vue'
 import {ref} from "vue";
 
 
 export default {
   name: "MoreView",
+  components: {
+    Card, CardMeta
+  },
   props: {
     url: String,
   },
@@ -20,11 +24,8 @@ export default {
     }
   },
   mounted() {
-
-
-    /* @vite-ignore */
-
-    const GS = GeoInfo[this.id];
+    const id = this.id;
+    const GS = GeoInfo[id];
     const [show, hide] = useTooltip()
     const width = 600, height = 600;
     const projection = d3.geoMercator()
@@ -33,7 +34,7 @@ export default {
         .translate([width / 2, height / 2]);
     const path = d3.geoPath(projection)
 
-    const svg = d3.select(`#A${this.id}`)
+    const svg = d3.select(`#A${id}`)
         .attr('width', width)
         .attr('height', height)
     const colors = d3.scaleOrdinal(d3.schemePaired)
@@ -47,7 +48,7 @@ export default {
         .attr("stroke-width", 1)
         .attr("fill", d => colors(d))
         .on("mouseover", function (e, d) {
-          show(e).html(ListView([`${d.properties.name}`]))
+          show(e).html(ListView([`${GeoMapping[`${GS.id}`]}`, `${d.properties.name}`,]))
           d3.select(this).attr("fill", '#ffff33');
         })
         .on("mouseout", function (e, d) {
@@ -75,9 +76,13 @@ export default {
 </script>
 
 <template>
-  <svg :id="`A${id}`"></svg>
+  <card style="" :bordered="false" class="back-color" hoverable>
+    <svg :id="`A${id}`"></svg>
+  </card>
 </template>
 
 <style scoped>
-
+.back-color {
+  background-color: rgba(255, 255, 255, 0);
+}
 </style>
