@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import {defineComponent} from "vue";
 import PicChart from "@/components/pie-chart/index.vue";
 import {useStore} from "@/store";
@@ -20,7 +20,8 @@ const store = useStore();
           <PicChart></PicChart>
         </a-col>
         <a-col :span="7">
-          <a-statistic title="不及格人数占比" :value="51.82" :precision="2" :value-from="0" animation :start="store.onRefreshDigitAnimation">
+          <a-statistic :precision="2" :start="store.onRefreshDigitAnimation" :value="51.82" :value-from="0" animation
+                       title="不及格人数占比">
             <template #prefix>
               <icon-arrow-rise/>
             </template>
@@ -28,7 +29,8 @@ const store = useStore();
           </a-statistic>
         </a-col>
         <a-col :span="7">
-          <a-statistic title="满分人数占比" :value="4.55" :precision="2" :value-from="0" animation :start="store.onRefreshDigitAnimation">
+          <a-statistic :precision="2" :start="store.onRefreshDigitAnimation" :value="4.55" :value-from="0" animation
+                       title="满分人数占比">
             <template #prefix>
               <icon-arrow-rise/>
             </template>

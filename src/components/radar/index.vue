@@ -133,6 +133,7 @@ export default {
       examPaperId = examPaperId >= 22760 ? 22541 : examPaperId + 1;
     }
 
+    // 防抖
     const f = debounce(() => {
       store.problemCategory = dataset;
       store.current = 'problemCategory'

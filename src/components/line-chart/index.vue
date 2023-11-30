@@ -2,7 +2,7 @@
 import * as d3 from 'd3';
 import {ListView, useTooltip} from "@/utils/tooltip.js";
 import {LineChart, Radar} from "@/data/source.js";
-
+// 总得分表
 export default {
   name: "LineChart",
   mounted: () => {
@@ -41,7 +41,7 @@ export default {
         .y(d => y(d.score));
 
     svg
-        .attr('height',290)
+        .attr('height', 290)
         .attr("width", width)
         .attr("viewBox", [0, 0, width, height])
 

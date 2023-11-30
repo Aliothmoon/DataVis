@@ -52,7 +52,7 @@ export default {
 
       const svg = d3.select("#curve-chart")
           .attr("viewBox", [0, 0, width, height])
-          .attr("width", width*0.9)
+          .attr("width", width * 0.9)
           .attr("height", height)
           .attr("style", "max-width: 100%; height: auto;");
 

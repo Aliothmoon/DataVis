@@ -70,13 +70,12 @@ export default {
         })
         .text(d => d.properties.name);
 
-
   }
 }
 </script>
 
 <template>
-  <card style="" :bordered="false" class="back-color" hoverable>
+  <card :bordered="false" class="back-color" hoverable style="">
     <svg :id="`A${id}`"></svg>
   </card>
 </template>

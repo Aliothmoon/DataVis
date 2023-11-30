@@ -9,15 +9,15 @@ export default {
 
 <template>
   <div class="card">
-    <a-card :bordered="false" >
+    <a-card :bordered="false">
       <a-row>
         <a-col :span="6">
-          <a-statistic title="总体学生平均分" :value="14.99" :precision="2" :value-from="0"  animation>
+          <a-statistic :precision="2" :value="14.99" :value-from="0" animation title="总体学生平均分">
             <template #suffix>/30分</template>
           </a-statistic>
         </a-col>
         <a-col :offset="3" :span="15">
-            <CurveChart></CurveChart>
+          <CurveChart></CurveChart>
         </a-col>
       </a-row>
     </a-card>

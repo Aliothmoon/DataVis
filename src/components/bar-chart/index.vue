@@ -3,20 +3,24 @@ import * as d3 from 'd3';
 import {SubmitTime} from "@/data/source.js";
 import {useTooltip, ListView} from "@/utils/tooltip.js";
 
+// 提交次数表
 export default {
   name: "BarChart",
   mounted: () => {
     const [show, hide] = useTooltip();
     const data = SubmitTime;
 
-    const allMinutes = d3.range(Math.floor(d3.min(data, d => +d.submitTime) / 60), Math.ceil(d3.max(data, d => +d.submitTime) / 60));
+    // 划分时间线
+    const timelines = d3.range(Math.floor(d3.min(data, d => +d.submitTime) / 60), Math.ceil(d3.max(data, d => +d.submitTime) / 60));
 
     // 将数据按照提交时间进行分组，并计算每个时间点的提交次数
     const groupedData = d3.rollups(data, v => v.length, d => Math.floor(+d.submitTime / 60));
-    let submitData = groupedData.map(([minute, count]) => ({date: new Date(minute * 60 * 1000), count}));
+
+    // 将数据按照提交时间进行分组，并计算每个时间点的提交次数
+    const submitData = groupedData.map(([minute, count]) => ({date: new Date(minute * 60 * 1000), count}));
 
     // 扩展submitData，将没有提交的时间点的计数设置为0
-    allMinutes.forEach(minute => {
+    timelines.forEach(minute => {
       if (!submitData.some(d => +d.date === minute * 60 * 1000)) {
         submitData.push({date: new Date(minute * 60 * 1000), count: 0});
       }
@@ -24,7 +28,6 @@ export default {
 
     // 按日期排序submitData
     submitData.sort((a, b) => d3.ascending(a.date, b.date));
-    // 将数据按照提交时间进行分组，并计算每个时间点的提交次数
 
 
     const svg = d3.select('#bar-chart')
@@ -59,8 +62,8 @@ export default {
       bottomCount: 0
     }
 
+    // 修正渲染区间
     const render = () => {
-
 
       svg.selectAll('.tick').remove()
       svg.select('g')
@@ -74,7 +77,6 @@ export default {
       svg.select("#bottom-axis").remove()
       svg.append('g').attr("transform", `translate(0, ${height - marginBottom})`)
           .call(d3.axisBottom(x).tickFormat(formatTime).tickSizeOuter(0));
-
 
 
       svg.select("path")
@@ -158,8 +160,6 @@ export default {
           y.domain([wheel.bottomCount, wheel.topCount])
           render()
         })
-
-
     init()
 
 

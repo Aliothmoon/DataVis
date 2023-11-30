@@ -1,9 +1,7 @@
 <script>
-import {h, reactive, ref} from "vue";
-import * as d3 from 'd3';
+import {h, ref} from "vue";
 import {ClassOutput} from "@/data/source.js";
 import {Button, Modal} from "@arco-design/web-vue";
-import MoreView from "@/components/more-view/index.vue";
 import ViewCarousel from "@/components/view-carousel/index.vue";
 import {useStore} from "@/store/index.js";
 

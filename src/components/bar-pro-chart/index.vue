@@ -9,7 +9,7 @@ import * as d3 from 'd3';
 import {useTooltip, ListView} from "@/utils/tooltip.js";
 import {PaperProblem} from '@/data/source.js'
 import {useStore} from "@/store/index.js";
-
+// 柱状图
 export default {
   name: "BarPro",
   mounted() {
@@ -17,20 +17,23 @@ export default {
     const problemScores = {};
     const problemCounts = {};
     PaperProblem.forEach(d => {
-      if (!problemScores[d.problem_id]) {
-        problemScores[d.problem_id] = 0;
-        problemCounts[d.problem_id] = 0;
+      if (!problemScores[d.problemId]) {
+        problemScores[d.problemId] = 0;
+        problemCounts[d.problemId] = 0;
       }
-
-      problemScores[d.problem_id] += parseFloat(d.score);
-      problemCounts[d.problem_id]++;
+      problemScores[d.problemId] += parseFloat(d.score);
+      problemCounts[d.problemId]++;
     });
     const avgScores = Object.keys(problemScores).map(id => ({
       problemId: id,
       avgScore: problemScores[id] / problemCounts[id]
     }));
 
+    //   Hooks
     const store = useStore();
+    const [show, hidden] = useTooltip()
+
+
     const svg = d3.select('#barPro')
     const width = 600;
     const height = 290;
@@ -39,7 +42,6 @@ export default {
     const marginBottom = 20;
     const marginLeft = 40;
 
-    const [show, hidden] = useTooltip()
     const colors = d3.scaleOrdinal(d3.schemeCategory10)
 
     const x = d3.scaleBand()
@@ -105,15 +107,15 @@ export default {
         .transition(d3.transition(d3.easeCircle).duration(1001))
         .attr("width", x.bandwidth())
 
-    // X
+    // X 轴
     svg.append("g")
         .attr('id', 'x-axis')
         .attr("transform", `translate(0,${height - marginBottom})`)
         .call(d3.axisBottom(x).tickSizeOuter(0))
         .call(g => g.selectAll(".tick text")
-            .attr("display", (_, i) => i % 1 === 0 ? null : "none"));  // Only display every 10th label
+            .attr("display", (_, i) => i % 1 === 0 ? null : "none"));
 
-    // Y
+    // Y 轴
     svg.append("g")
         .attr("transform", `translate(${marginLeft},0)`)
         .call(d3.axisLeft(y).tickFormat(y => y.toFixed(1)))
@@ -121,7 +123,6 @@ export default {
         .call(g => g.append("text")
             .attr("x", -marginLeft)
             .attr("y", 10)
-            // .attr('font-size',)
             .attr("fill", "currentColor")
             .attr("text-anchor", "start")
             .text("↑ Average Score"));

@@ -15,7 +15,7 @@ onMounted(() => {
 
   const paper = ExamPaper;
 
-  let data = [
+  const data = [
     {name: "0-5", value: 0},
     {name: "5-10", value: 0},
     {name: "10-15", value: 0},
@@ -62,7 +62,7 @@ onMounted(() => {
       .attr("fill", d => color(d.data.name))
 
       .attr("d", arc)
-      .on('mouseenter', function (e) {
+      .on('mouseenter', function () {
         d3.select(this)
             .transition(d3.transition(d3.easeBackInOut).duration(120))
             .attr("d", better)
@@ -71,16 +71,12 @@ onMounted(() => {
         const data = d.data;
         show(e).html(ListView([`分数段: ${data.name}`, `总体占比 ${(data.value / 2.2).toFixed(1)}%`]))
       })
-      .on('mouseout', function (e) {
+      .on('mouseout', function () {
         d3.select(this)
             .transition(d3.transition(d3.easeBackInOut).duration(300))
             .attr("d", arc)
         hide()
       })
-      .append("title")
-      .text(d => `${d.data.name}: ${d.data.value.toLocaleString("en-US")}`)
-
-
 })
 </script>
 

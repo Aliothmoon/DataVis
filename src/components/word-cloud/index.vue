@@ -5,7 +5,6 @@ import {CloudWords} from "@/data/source.js"
 import {useTooltip, ListView} from "@/utils/tooltip.js";
 import {useStore} from "@/store/index.js";
 import {Animations} from "@/utils/d3-animation.js";
-import {watch} from "vue";
 
 export default {
   name: "WordCloud",
@@ -20,12 +19,9 @@ export default {
     });
     const type = ['archimedean', 'rectangular'];
 
-    const transition = d3.transition().duration(700).ease(d3.easeCubic);
     // 布局
 
     const [width, height] = [300, 300];
-
-    let dataset = [];
 
     const colors = d3.scaleOrdinal(d3.schemeCategory10);
     const layout = new WordsCloud()
@@ -33,9 +29,7 @@ export default {
         .words(data)
         .font('Impact')
         .spiral('rectangular')
-        .on('end', (d) => {
-          dataset = d;
-        });
+
 
     // 执行layout算法
     layout.start();

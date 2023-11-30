@@ -43,20 +43,20 @@ export default {
 </script>
 
 <template>
-  <div class="card all-box-shadow" :style="trigger && a">
-    <div class="border" :style="trigger && c"></div>
+  <div :style="trigger && a" class="card all-box-shadow">
+    <div :style="trigger && c" class="border"></div>
     <div class="content">
-      <div class="logo" :style="trigger && b">
+      <div :style="trigger && b" class="logo">
         <div class="logo1">
         </div>
         <div class="logo2">
           <div style="color: white">数据可视化</div>
         </div>
-        <span class="trail" :style="trigger && f"></span>
+        <span :style="trigger && f" class="trail"></span>
       </div>
-      <span class="logo-bottom-text" :style="trigger && e">在线评测数据可视化</span>
+      <span :style="trigger && e" class="logo-bottom-text">在线评测数据可视化</span>
     </div>
-    <span class="bottom-text" :style="trigger && d">Power By Aliothmoon</span>
+    <span :style="trigger && d" class="bottom-text">Power By Aliothmoon</span>
   </div>
 </template>
 
@@ -166,7 +166,7 @@ export default {
 
 .card:hover .content .logo-bottom-text {
   opacity: 1;
-  letter-spacing: 9.5px;
+  letter-spacing: 9px;
 }
 
 .card:hover .trail {

@@ -7,8 +7,7 @@
   </div>
 </template>
 <script>
-import {defineComponent, ref} from 'vue';
-import {Message} from '@arco-design/web-vue';
+import {defineComponent} from 'vue';
 import WordCloud from "@/components/word-cloud/index.vue";
 import {
   IconCaretRight,

@@ -1,9 +1,7 @@
 <script>
 import PicChart from "@/components/pie-chart/index.vue";
 import WordCloud from "@/components/word-cloud/index.vue";
-import {ref} from "vue";
 import Radar from "@/components/radar/index.vue";
-import BarProChart from "@/components/bar-pro-chart/index.vue";
 import BarPro from "@/components/bar-pro-chart/index.vue";
 import DTable from "@/components/table/index.vue";
 import BarChart from "@/components/bar-chart/index.vue";
@@ -29,10 +27,10 @@ export default {
   <div style="height: 1px;background-color: rgba(147,184,227,0.5);">
 
   </div>
-    <Overview></Overview>
+  <Overview></Overview>
   <div style="margin-left: 60px;">
     <a-row :align="'center'">
-      <a-col :span="6" >
+      <a-col :span="6">
         <a-card class="all-box-shadow" hoverable>
           <Radar></Radar>
         </a-card>
@@ -43,7 +41,7 @@ export default {
         </a-card>
       </a-col>
       <a-col :span="5" offset="">
-        <a-card  class="all-box-shadow" hoverable>
+        <a-card class="all-box-shadow" hoverable>
           <WordCloud></WordCloud>
         </a-card>
       </a-col>
