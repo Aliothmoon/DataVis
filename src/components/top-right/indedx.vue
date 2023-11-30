@@ -41,9 +41,6 @@ const store = useStore();
     </a-card>
   </div>
 
-  <!--  <div class="card">-->
-  <!--    <PicChart></PicChart>-->
-  <!--  </div>-->
 </template>
 
 <style scoped>

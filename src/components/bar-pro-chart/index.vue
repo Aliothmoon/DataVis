@@ -7,13 +7,13 @@
 <script>
 import * as d3 from 'd3';
 import {useTooltip, ListView} from "@/utils/tooltip.js";
-import {debounce} from 'lodash'
 import {PaperProblem} from '@/data/source.js'
 import {useStore} from "@/store/index.js";
 
 export default {
   name: "BarPro",
   mounted() {
+    // 计算每个问题的平均分数
     const problemScores = {};
     const problemCounts = {};
     PaperProblem.forEach(d => {
@@ -54,7 +54,6 @@ export default {
     svg.attr("width", width * .9)
         .attr("viewBox", [0, 0, width, height])
 
-    // 柱
     const g = svg.append("g")
         .selectAll()
         .data(avgScores)
@@ -70,6 +69,7 @@ export default {
 
 
     const trigger = () => {
+      // 排序平均分数的顺序
       avgScores.sort((a, b) => {
         return Math.random() - 0.5
       })

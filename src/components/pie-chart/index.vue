@@ -12,8 +12,7 @@ onMounted(() => {
   const svg = d3.select('.pic-chart')
   const width = 180;
   const height = Math.min(width, 400);
-  // const data = PopulationAge;
-  // Create the color scale.
+
   const paper = ExamPaper;
 
   let data = [
@@ -37,8 +36,7 @@ onMounted(() => {
   const color = d3.scaleOrdinal()
       .domain(data.map(d => d.name))
       .range(d3.quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), data.length).reverse())
-  //
-  // // Create the pie layout and arc generator.
+
   const pie = d3.pie()
       .sort(null)
       .value(d => d.value);
@@ -51,14 +49,10 @@ onMounted(() => {
       .innerRadius(25)
       .outerRadius(90);
 
-  const labelRadius = arc.outerRadius()() * 0.8;
-
-
-
   const arcs = pie(data);
-  //
+
   svg.attr("viewBox", [-width / 2, -height / 2, width, height])
-  //
+
   svg.append("g")
       .attr("stroke", "white")
       .selectAll()

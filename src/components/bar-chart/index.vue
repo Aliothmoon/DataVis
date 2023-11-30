@@ -76,7 +76,7 @@ export default {
           .call(d3.axisBottom(x).tickFormat(formatTime).tickSizeOuter(0));
 
 
-      // Append a path for the line.
+
       svg.select("path")
           .transition(d3.transition(d3.easeCircle).duration(1001))
           .attr("fill", "none")
@@ -84,7 +84,6 @@ export default {
           .attr("stroke-width", 1.5)
           .attr("d", line(submitData))
 
-      // Add a horizontal line at y=0
       svg.append("line")
           .attr("x1", marginLeft)
           .attr("y1", y(0))
@@ -116,7 +115,6 @@ export default {
               .attr('font-size', 12)
               .text("↑ 提交次数"))
 
-      // Append a path for the line.
       svg.append("path")
           .transition(d3.transition(d3.easeCircle).duration(1001))
           .attr("fill", "none")
@@ -124,7 +122,6 @@ export default {
           .attr("stroke-width", 1.5)
           .attr("d", line(submitData))
 
-      // Add a horizontal line at y=0
       svg.append("line")
           .attr('id', 'yy1')
           .attr("x1", marginLeft)

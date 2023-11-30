@@ -39,7 +39,6 @@ export default {
 
       const stack = d3.stack()
           .keys(d3.range(n))
-          // .offset(offset)
           .order(d3.stackOrderNone);
 
       function randomize() {
