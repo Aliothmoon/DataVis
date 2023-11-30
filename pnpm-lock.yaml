@@ -104,9 +104,6 @@ dependencies:
   d3-selection:
     specifier: ^3.0.0
     version: 3.0.0
-  fs:
-    specifier: ^0.0.1-security
-    version: 0.0.1-security
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
@@ -116,12 +113,6 @@ dependencies:
   pinia:
     specifier: ^2.1.7
     version: 2.1.7(typescript@5.0.2)(vue@3.3.4)
-  topojson:
-    specifier: ^3.0.2
-    version: 3.0.2
-  topojson-client:
-    specifier: ^3.1.0
-    version: 3.1.0
   vue:
     specifier: ^3.3.4
     version: 3.3.4
@@ -812,10 +803,6 @@ packages:
       color-string: 1.9.1
     dev: true
 
-  /commander@2.20.3:
-    resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
-    dev: false
-
   /commander@7.2.0:
     resolution: {integrity: sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==}
     engines: {node: '>= 10'}
@@ -1137,10 +1124,6 @@ packages:
   /estree-walker@2.0.2:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
 
-  /fs@0.0.1-security:
-    resolution: {integrity: sha1-invTcYa23d84E/I4WLV+yq9eQdQ=}
-    dev: false
-
   /fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -1291,45 +1274,6 @@ packages:
   /to-fast-properties@2.0.0:
     resolution: {integrity: sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=}
     engines: {node: '>=4'}
-
-  /topojson-client@3.0.0:
-    resolution: {integrity: sha1-H5kpOnfvQqRI0DKoGqmCtz82DS8=}
-    hasBin: true
-    dependencies:
-      commander: 2.20.3
-    dev: false
-
-  /topojson-client@3.1.0:
-    resolution: {integrity: sha512-605uxS6bcYxGXw9qi62XyrV6Q3xwbndjachmNxu8HWTtVPxZfEJN9fd/SZS1Q54Sn2y0TMyMxFj/cJINqGHrKw==}
-    hasBin: true
-    dependencies:
-      commander: 2.20.3
-    dev: false
-
-  /topojson-server@3.0.0:
-    resolution: {integrity: sha1-N4546Hw5cqe1vixdYENptrrmnF4=}
-    hasBin: true
-    dependencies:
-      commander: 2.20.3
-    dev: false
-
-  /topojson-simplify@3.0.2:
-    resolution: {integrity: sha512-gyYSVRt4jO/0RJXKZQPzTDQRWV+D/nOfiljNUv0HBXslFLtq3yxRHrl7jbrjdbda5Ytdr7M8BZUI4OxU7tnbRQ==}
-    hasBin: true
-    dependencies:
-      commander: 2.20.3
-      topojson-client: 3.1.0
-    dev: false
-
-  /topojson@3.0.2:
-    resolution: {integrity: sha512-u3zeuL6WEVL0dmsRn7uHZKc4Ao4gpW3sORUv+N3ezLTvY3JdCuyg0hvpWiIfFw8p/JwVN++SvAsFgcFEeR15rQ==}
-    deprecated: Use topojson-client, topojson-server or topojson-simplify directly.
-    hasBin: true
-    dependencies:
-      topojson-client: 3.0.0
-      topojson-server: 3.0.0
-      topojson-simplify: 3.0.2
-    dev: false
 
   /typescript@5.0.2:
     resolution: {integrity: sha512-wVORMBGO/FAs/++blGNeAVdbNKtIh1rbBL2EyQ1+J9lClJ93KiiKe8PmFIVdXhHcyv44SL9oglmfeSsndo0jRw==}

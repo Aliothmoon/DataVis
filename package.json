@@ -42,12 +42,9 @@
     "d3-interpolate-path": "^2.3.0",
     "d3-scale": "^4.0.2",
     "d3-selection": "^3.0.0",
-    "fs": "^0.0.1-security",
     "lodash": "^4.17.21",
     "papaparse": "^5.4.1",
     "pinia": "^2.1.7",
-    "topojson": "^3.0.2",
-    "topojson-client": "^3.1.0",
     "vue": "^3.3.4",
     "yarn": "^1.22.21"
   },
