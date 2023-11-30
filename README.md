@@ -1,7 +1,7 @@
 ## 数据可视化 课程设计
 😎 图片示例
 
-![image.png](https://ivresse.top/api/img/2023-11-30-22-33-15686--4b2492a8-0c75-49d4-8c3c-e1104bb46fb1.png)
+![image.png](https://ivresse.top/api/img/2023-11-30-22-46-42818--db5732c9-7769-45f8-adca-4ff6d43ecd46.png)
 
 
 🥰 [演示地址](https://datavis.ivresse.top/)
