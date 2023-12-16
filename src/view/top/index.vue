@@ -1,31 +1,22 @@
 <script>
-import PicChart from "@/components/pie-chart/index.vue";
 import WordCloud from "@/components/word-cloud/index.vue";
 import Radar from "@/components/radar/index.vue";
 import BarPro from "@/components/bar-pro-chart/index.vue";
-import DTable from "@/components/table/index.vue";
-import BarChart from "@/components/bar-chart/index.vue";
 import Overview from "@/components/overview/index.vue";
-import CurveChart from "@/components/curve-chart/index.vue";
 
 export default {
   name: "Top",
   components: {
-    CurveChart,
     Overview,
-    PicChart,
-    BarChart, DTable,
     BarPro,
     Radar,
     WordCloud,
-    // PicChart,
   },
 }
 </script>
 
 <template>
   <div style="height: 1px;background-color: rgba(147,184,227,0.5);">
-
   </div>
   <Overview></Overview>
   <div style="margin-left: 60px;">

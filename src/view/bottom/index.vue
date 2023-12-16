@@ -1,12 +1,13 @@
 <script>
-import BarChart from "@/components/bar-chart/index.vue";
+import BrushLineChart from "@/components/brush-line-chart/index.vue";
 import DTable from "@/components/table/index.vue";
 import LineChart from "@/components/line-chart/index.vue";
-import BarPro from "@/components/bar-pro-chart/index.vue";
 
 export default {
   name: "Bottom",
-  components: {BarPro, LineChart, BarChart, DTable},
+  components: {
+    LineChart, BrushLineChart, DTable
+  },
 }
 </script>
 
@@ -16,7 +17,7 @@ export default {
       <a-card class="all-box-shadow" hoverable style="height: 100%;margin-right: 5px;">
         <a-tabs default-active-key="1">
           <a-tab-pane key="1" :title="'提交次数表'">
-            <BarChart></BarChart>
+            <BrushLineChart></BrushLineChart>
           </a-tab-pane>
           <a-tab-pane key="2" :title="'总得分表'">
             <LineChart></LineChart>

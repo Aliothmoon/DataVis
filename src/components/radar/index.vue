@@ -1,7 +1,5 @@
 <template>
-  <!--  <div style="height: 40vh;width: 20vw">-->
   <svg id="radar" preserveAspectRatio="xMaxYMax"></svg>
-  <!--  </div>-->
 </template>
 
 <script>

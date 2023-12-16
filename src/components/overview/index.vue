@@ -1,12 +1,13 @@
 <script>
-import PicChart from "@/components/pie-chart/index.vue";
 import TopLeftView from "@/components/top-left/index.vue";
 import TopMiddleView from "@/components/top-middle/index.vue";
 import TopRightView from "@/components/top-right/indedx.vue";
 
 export default {
   name: "Overview",
-  components: {TopRightView, TopMiddleView, TopLeftView, PicChart},
+  components: {
+    TopRightView, TopMiddleView, TopLeftView
+  },
 }
 </script>
 
