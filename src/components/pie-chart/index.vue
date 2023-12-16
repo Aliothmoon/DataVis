@@ -13,6 +13,7 @@ onMounted(() => {
   const width = 180;
   const height = Math.min(width, 400);
 
+
   const paper = ExamPaper;
 
   let data = [
@@ -37,10 +38,12 @@ onMounted(() => {
       .domain(data.map(d => d.name))
       .range(d3.quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), data.length).reverse())
 
+  //.value指定每个数据点应该如何转换为饼图中的大小
   const pie = d3.pie()
       .sort(null)
       .value(d => d.value);
 
+  //d3.arc()`: 创建一个弧形布局生成器，它返回一个函数，该函数将数据点转换为弧形。
   const arc = d3.arc()
       .innerRadius(25)
       .outerRadius(80);
@@ -57,12 +60,15 @@ onMounted(() => {
       .attr("stroke", "white")
       .selectAll()
       .data(arcs)
+      //绑定dom元素到数据，当数据改变时，会重新绑定
       .enter()
       .append("path")
+      // 设置path元素的填充颜色为对应数据的名称对应的颜色
       .attr("fill", d => color(d.data.name))
-
+      // 使用.attr("d", arc)为图形设置路径
       .attr("d", arc)
       .on('mouseenter', function (e) {
+        // console.log(this)
         d3.select(this)
             .transition(d3.transition(d3.easeBackInOut).duration(120))
             .attr("d", better)
@@ -73,6 +79,7 @@ onMounted(() => {
       })
       .on('mouseout', function (e) {
         d3.select(this)
+            //transition()方法返回一个过渡生成器，该生成器将为每个数据点添加一个过渡效果
             .transition(d3.transition(d3.easeBackInOut).duration(300))
             .attr("d", arc)
         hide()
